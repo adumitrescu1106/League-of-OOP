@@ -103,6 +103,10 @@ public class Champion implements Visitable {
         this.setHp(this.getHp() - dmg);
     }
 
+    public final void heal(final int heal) {
+        this.setHp(this.getHp() + heal);
+    }
+
     public final int getOvertimeDuration() {
         return overtimeDuration;
     }

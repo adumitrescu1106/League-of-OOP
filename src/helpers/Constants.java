@@ -83,4 +83,26 @@ public class Constants {
     public static final float PARALYSIS_ROGUE = 0.9f;
     public static final float PARALYSIS_PYRO = 1.2f;
     public static final float PARALYSIS_WIZARD = 1.25f;
+
+    //angels
+    //dark angel
+    public static final int DARK_KNIGHT_DMG = 40;
+    public static final int DARK_PYRO_DMG = 30;
+    public static final int DARK_WIZARD_DMG = 20;
+    public static final int DARK_ROGUE_DMG = 10;
+    //Life Giver
+    public static final int LIFE_KNIGHT_DMG = 100;
+    public static final int LIFE_PYRO_DMG = 80;
+    public static final int LIFE_WIZARD_DMG = 120;
+    public static final int LIFE_ROGUE_DMG = 90;
+    //XPAngel
+    public static final int XP_KNIGHT = 45;
+    public static final int XP_PYRO = 50;
+    public static final int XP_ROGUE = 40;
+    public static final int XP_WIZARD = 60;
+    //Spawner
+    public static final int REVIVE_KNIGHT = 200;
+    public static final int REVIVE_PYRO = 150;
+    public static final int REVIVE_ROGUE = 180;
+    public static final int REVIVE_WIZARD = 120;
 }
