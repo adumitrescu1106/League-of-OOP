@@ -11,6 +11,10 @@ public class Backstab extends Ability implements Visitor {
 
     public Backstab() {
         this.backstabDmg = Constants.BACKSTAB_DMG;
+        this.setKnightModifier(Constants.BACKSTAB_KNIGHT);
+        this.setPyroModifier(Constants.BACKSTAB_PYRO);
+        this.setRogueModifier(Constants.BACKSTAB_ROGUE);
+        this.setWizardModifier(Constants.BACKSTAB_WIZARD);
     }
 
     public final int getBackstabDmg() {
@@ -30,7 +34,7 @@ public class Backstab extends Ability implements Visitor {
         if (knight.getBackstabIndex() == 0) {
             if (knight.getPosition().equals('W')) {
                 knight.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                        * Constants.BACKSTAB_KNIGHT * Constants.BACKSTAB_CRIT));
+                        * this.getKnightModifier() * Constants.BACKSTAB_CRIT));
                 knight.setBackstabIndex(Constants.BACKSTAB_INDEX);
                 return;
             } else {
@@ -39,10 +43,10 @@ public class Backstab extends Ability implements Visitor {
         }
         if (knight.getPosition().equals('W')) {
             knight.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                    * Constants.BACKSTAB_KNIGHT));
+                    * this.getKnightModifier()));
             knight.setBackstabIndex(knight.getBackstabIndex() - 1);
         } else {
-            knight.takeDmg(Math.round(backstabDmg * Constants.BACKSTAB_KNIGHT));
+            knight.takeDmg(Math.round(backstabDmg * this.getKnightModifier()));
             knight.setBackstabIndex(knight.getBackstabIndex() - 1);
         }
     }
@@ -52,7 +56,7 @@ public class Backstab extends Ability implements Visitor {
         if (pyromancer.getBackstabIndex() == 0) {
             if (pyromancer.getPosition().equals('W')) {
                 pyromancer.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                        * Constants.BACKSTAB_PYRO * Constants.BACKSTAB_CRIT));
+                        * this.getPyroModifier() * Constants.BACKSTAB_CRIT));
                 pyromancer.setBackstabIndex(Constants.BACKSTAB_INDEX);
                 return;
             } else {
@@ -61,10 +65,10 @@ public class Backstab extends Ability implements Visitor {
         }
         if (pyromancer.getPosition().equals('W')) {
             pyromancer.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                    * Constants.BACKSTAB_PYRO));
+                    * this.getPyroModifier()));
             pyromancer.setBackstabIndex(pyromancer.getBackstabIndex() - 1);
         } else {
-            pyromancer.takeDmg(Math.round(backstabDmg * Constants.BACKSTAB_PYRO));
+            pyromancer.takeDmg(Math.round(backstabDmg * this.getPyroModifier()));
             pyromancer.setBackstabIndex(pyromancer.getBackstabIndex() - 1);
         }
     }
@@ -73,7 +77,7 @@ public class Backstab extends Ability implements Visitor {
         if (rogue.getBackstabIndex() == 0) {
             if (rogue.getPosition().equals('W')) {
                 rogue.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                        * Constants.BACKSTAB_ROGUE * Constants.BACKSTAB_CRIT));
+                        * this.getRogueModifier() * Constants.BACKSTAB_CRIT));
                 rogue.setBackstabIndex(Constants.BACKSTAB_INDEX);
                 return;
             } else {
@@ -82,10 +86,10 @@ public class Backstab extends Ability implements Visitor {
         }
         if (rogue.getPosition().equals('W')) {
             rogue.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                    * Constants.BACKSTAB_ROGUE));
+                    * this.getRogueModifier()));
             rogue.setBackstabIndex(rogue.getOvertimeDuration() - 1);
         } else {
-            rogue.takeDmg(Math.round(backstabDmg * Constants.BACKSTAB_ROGUE));
+            rogue.takeDmg(Math.round(backstabDmg * this.getRogueModifier()));
             rogue.setBackstabIndex(rogue.getOvertimeDuration() - 1);
         }
     }
@@ -94,7 +98,7 @@ public class Backstab extends Ability implements Visitor {
         if (wizard.getBackstabIndex() == 0) {
             if (wizard.getPosition().equals('W')) {
                 wizard.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                        * Constants.BACKSTAB_WIZARD * Constants.BACKSTAB_CRIT));
+                        * this.getWizardModifier() * Constants.BACKSTAB_CRIT));
                 wizard.addDamageDeflect(Math.round(backstabDmg * Constants.WOODS_LAND
                         * Constants.BACKSTAB_CRIT));
                         wizard.setBackstabIndex(Constants.BACKSTAB_INDEX);
@@ -105,13 +109,13 @@ public class Backstab extends Ability implements Visitor {
         }
         if (wizard.getPosition().equals('W')) {
             wizard.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
-                    * Constants.BACKSTAB_WIZARD));
+                    *  this.getWizardModifier()));
             wizard.setBackstabIndex(wizard.getOvertimeDuration() - 1);
             wizard.addDamageDeflect(Math.round(backstabDmg * Constants.WOODS_LAND));
             // tot damageul primit de wizard se tine minte de-a lungul rundei
             // pentru aplicarea deflectului
         } else {
-            wizard.takeDmg(Math.round(backstabDmg * Constants.BACKSTAB_WIZARD));
+            wizard.takeDmg(Math.round(backstabDmg *  this.getWizardModifier()));
             wizard.setBackstabIndex(wizard.getOvertimeDuration() - 1);
             wizard.addDamageDeflect(Math.round(backstabDmg));
         }

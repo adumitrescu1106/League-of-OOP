@@ -6,6 +6,42 @@ import champions.Rogue;
 import champions.Wizard;
 
 public class Ability implements Visitor {
+    private float knightModifier;
+    private float pyroModifier;
+    private float rogueModifier;
+    private float wizardModifier;
+
+    public final float getKnightModifier() {
+        return knightModifier;
+    }
+
+    public final void setKnightModifier(float knightModifier) {
+        this.knightModifier = knightModifier;
+    }
+
+    public final float getPyroModifier() {
+        return pyroModifier;
+    }
+
+    public final void setPyroModifier(float pyroModifier) {
+        this.pyroModifier = pyroModifier;
+    }
+
+    public final float getRogueModifier() {
+        return rogueModifier;
+    }
+
+    public final void setRogueModifier(float rogueModifier) {
+        this.rogueModifier = rogueModifier;
+    }
+
+    public final float getWizardModifier() {
+        return wizardModifier;
+    }
+
+    public final void setWizardModifier(float wizardModifier) {
+        this.wizardModifier = wizardModifier;
+    }
 
     public void levelUP() {
     }

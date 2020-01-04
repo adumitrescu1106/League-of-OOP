@@ -105,4 +105,36 @@ public class Constants {
     public static final int REVIVE_PYRO = 150;
     public static final int REVIVE_ROGUE = 180;
     public static final int REVIVE_WIZARD = 120;
+    //DamageAngel
+    public static final float DAMAGE_ANGEL_K = 0.15f;
+    public static final float DAMAGE_ANGEL_P = 0.2f;
+    public static final float DAMAGE_ANGEL_R = 0.3f;
+    public static final float DAMAGE_ANGEL_W = 0.4f;
+    //Dracula
+    public static final float DRACULA_K = 0.2f;
+    public static final float DRACULA_P = 0.3f;
+    public static final float DRACULA_R = 0.1f;
+    public static final float DRACULA_W = 0.4f;
+    public static final int DRACULA_KNIGHT_DMG = 60;
+    public static final int DRACULA_PYRO_DMG = 40;
+    public static final int DRACULA_WIZARD_DMG = 20;
+    public static final int DRACULA_ROGUE_DMG = 35;
+    //GoodBoy
+    public static final float GOODBOY_K = 0.4f;
+    public static final float GOODBOY_P = 0.5f;
+    public static final float GOODBOY_R = 0.4f;
+    public static final float GOODBOY_W = 0.3f;
+    public static final int GOODBOY_KNIGHT_HEAL = 20;
+    public static final int GOODBOY_PYRO_HEAL = 30;
+    public static final int GOODBOY_ROGUE_HEAL = 40;
+    public static final int GOODBOY_WIZARD_HEAL = 50;
+    //SmallAngel
+    public static final float SMALLANGEL_K = 0.1f;
+    public static final float SMALLANGEL_P = 0.15f;
+    public static final float SMALLANGEL_R = 0.05f;
+    public static final float SMALLANGEL_W = 0.1f;
+    public static final int SMALLANGEL_KNIGHT_HEAL = 10;
+    public static final int SMALLANGEL_PYRO_HEAL = 15;
+    public static final int SMALLANGEL_ROGUE_HEAL = 20;
+    public static final int SMALLANGEL_WIZARD_HEAL = 25;
 }

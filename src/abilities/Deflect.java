@@ -10,6 +10,9 @@ public class Deflect extends Ability implements Visitor {
 
     public Deflect() {
         this.deflectPercent = Constants.DEFLECT_PERCENT;
+        this.setKnightModifier(Constants.DEFLECT_KNIGHT);
+        this.setPyroModifier(Constants.DEFLECT_PYRO);
+        this.setRogueModifier(Constants.DEFLECT_ROGUE);
     }
 
     public final float getDeflectPercent() {
@@ -27,30 +30,30 @@ public class Deflect extends Ability implements Visitor {
     public final void visit(final Knight knight) {
         if (knight.getPosition().equals('D')) {
             knight.takeDmg(Math.round(deflectPercent * Constants.DESERT_LAND
-                    * Constants.DEFLECT_KNIGHT * knight.getdamageDeflect()));
+                    * this.getKnightModifier() * knight.getdamageDeflect()));
         } else {
             knight.takeDmg(Math.round(deflectPercent
-                    * Constants.DEFLECT_KNIGHT * knight.getdamageDeflect()));
+                    * this.getKnightModifier() * knight.getdamageDeflect()));
         }
     }
 
     public final void visit(final Pyromancer pyromancer) {
         if (pyromancer.getPosition().equals('D')) {
             pyromancer.takeDmg(Math.round(deflectPercent * Constants.DESERT_LAND
-                    * Constants.DEFLECT_PYRO * pyromancer.getdamageDeflect()));
+                    * this.getPyroModifier() * pyromancer.getdamageDeflect()));
         } else {
             pyromancer.takeDmg(Math.round(deflectPercent
-                    * Constants.DEFLECT_PYRO * pyromancer.getdamageDeflect()));
+                    * this.getPyroModifier() * pyromancer.getdamageDeflect()));
         }
     }
 
     public final void visit(final Rogue rogue) {
         if (rogue.getPosition().equals('D')) {
             rogue.takeDmg(Math.round(deflectPercent * Constants.DESERT_LAND
-                    * Constants.DEFLECT_ROGUE * rogue.getdamageDeflect()));
+                    * this.getRogueModifier() * rogue.getdamageDeflect()));
         } else {
             rogue.takeDmg(Math.round(deflectPercent
-                    * Constants.DEFLECT_ROGUE * rogue.getdamageDeflect()));
+                    * this.getRogueModifier() * rogue.getdamageDeflect()));
         }
     }
 

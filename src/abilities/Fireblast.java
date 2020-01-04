@@ -11,6 +11,10 @@ public class Fireblast extends Ability implements Visitor {
 
     public Fireblast() {
         this.fireblastDmg = Constants.FIREBLAST_DMG;
+        this.setKnightModifier(Constants.FIREBLAST_KNIGHT);
+        this.setPyroModifier(Constants.FIREBLAST_PYRO);
+        this.setRogueModifier(Constants.FIREBLAST_ROGUE);
+        this.setWizardModifier(Constants.FIREBLAST_WIZARD);
     }
 
     public final int getFireblastDmg() {
@@ -26,9 +30,9 @@ public class Fireblast extends Ability implements Visitor {
         // pe care se desfasoara lupta
         if (knight.getPosition().equals('V')) {
             knight.takeDmg(Math.round(fireblastDmg * Constants.VOLCANIC_LAND
-                    * Constants.FIREBLAST_KNIGHT));
+                    * this.getKnightModifier()));
         } else {
-            knight.takeDmg(Math.round(fireblastDmg * Constants.FIREBLAST_KNIGHT));
+            knight.takeDmg(Math.round(fireblastDmg * this.getKnightModifier()));
         }
     }
 
@@ -36,9 +40,9 @@ public class Fireblast extends Ability implements Visitor {
     public final void visit(final Pyromancer pyromancer) {
         if (pyromancer.getPosition().equals('V')) {
             pyromancer.takeDmg(Math.round(fireblastDmg * Constants.VOLCANIC_LAND
-                    * Constants.FIREBLAST_PYRO));
+                    * this.getPyroModifier()));
         } else {
-            pyromancer.takeDmg(Math.round(fireblastDmg * Constants.FIREBLAST_PYRO));
+            pyromancer.takeDmg(Math.round(fireblastDmg * this.getPyroModifier()));
         }
     }
 
@@ -46,9 +50,9 @@ public class Fireblast extends Ability implements Visitor {
     public final void visit(final Rogue rogue) {
         if (rogue.getPosition().equals('V')) {
             rogue.takeDmg(Math.round(fireblastDmg * Constants.VOLCANIC_LAND
-                    * Constants.FIREBLAST_ROGUE));
+                    * this.getRogueModifier()));
         } else {
-            rogue.takeDmg(Math.round(fireblastDmg * Constants.FIREBLAST_ROGUE));
+            rogue.takeDmg(Math.round(fireblastDmg * this.getRogueModifier()));
         }
     }
 
@@ -56,10 +60,10 @@ public class Fireblast extends Ability implements Visitor {
     public final void visit(final Wizard wizard) {
         if (wizard.getPosition().equals('V')) {
             wizard.takeDmg(Math.round(fireblastDmg * Constants.VOLCANIC_LAND
-                    * Constants.FIREBLAST_WIZARD));
+                    * this.getWizardModifier()));
             wizard.addDamageDeflect(Math.round(fireblastDmg * Constants.VOLCANIC_LAND));
         } else {
-            wizard.takeDmg(Math.round(fireblastDmg * Constants.FIREBLAST_WIZARD));
+            wizard.takeDmg(Math.round(fireblastDmg * this.getWizardModifier()));
             wizard.addDamageDeflect(Math.round(fireblastDmg));
         }
     }

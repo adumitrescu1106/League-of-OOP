@@ -18,6 +18,14 @@ public class Rogue extends Champion implements Visitable {
         super(x, y, arena);
         this.setHp(Constants.ROGUE_HP);
         this.type = "R";
+        this.setkFirstModifier(Constants.BACKSTAB_KNIGHT);
+        this.setkSecondModifier(Constants.PARALYSIS_KNIGHT);
+        this.setpFirstModifier(Constants.BACKSTAB_PYRO);
+        this.setpSecondModifier(Constants.PARALYSIS_PYRO);
+        this.setrFirstModifier(Constants.BACKSTAB_ROGUE);
+        this.setrSecondModifier(Constants.PARALYSIS_ROGUE);
+        this.setwFirstModifier(Constants.BACKSTAB_WIZARD);
+        this.setwSecondModifier(Constants.PARALYSIS_WIZARD);
     }
 
     public final String getType() {

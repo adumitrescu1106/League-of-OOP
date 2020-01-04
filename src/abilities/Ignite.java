@@ -13,6 +13,10 @@ public class Ignite extends Ability implements Visitor {
     public Ignite() {
         this.igniteDmg = Constants.IGNITE_BASE_DMG;
         this.igniteOvertime = Constants.IGNITE_OVERTIME;
+        this.setKnightModifier(Constants.IGNITE_KNIGHT);
+        this.setPyroModifier(Constants.IGNITE_PYRO);
+        this.setRogueModifier(Constants.IGNITE_ROGUE);
+        this.setWizardModifier(Constants.IGNITE_WIZARD);
     }
 
     public final int getIgniteDmg() {
@@ -37,15 +41,15 @@ public class Ignite extends Ability implements Visitor {
         // se seteaza tipul damage-ului overtime, durata si damage-ul
         knight.setOvertimeType("ignite");
         knight.setOvertimeDuration(Constants.IGNITE_ROUNDS);
-        knight.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_KNIGHT));
+        knight.setOvertimeDmg(Math.round(igniteOvertime * this.getKnightModifier()));
         if (knight.getPosition().equals('V')) {
             // se aplica damage-ul din runda in care este castat ignite-ul
             knight.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND
-                    * Constants.IGNITE_KNIGHT));
-            knight.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_KNIGHT
+                    * this.getKnightModifier()));
+            knight.setOvertimeDmg(Math.round(igniteOvertime * this.getKnightModifier()
                     * Constants.VOLCANIC_LAND));
         } else {
-            knight.takeDmg(Math.round(igniteDmg * Constants.IGNITE_KNIGHT));
+            knight.takeDmg(Math.round(igniteDmg * this.getKnightModifier()));
         }
     }
 
@@ -53,14 +57,14 @@ public class Ignite extends Ability implements Visitor {
     public final void visit(final Pyromancer pyromancer) {
         pyromancer.setOvertimeType("ignite");
         pyromancer.setOvertimeDuration(Constants.IGNITE_ROUNDS);
-        pyromancer.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_PYRO));
+        pyromancer.setOvertimeDmg(Math.round(igniteOvertime * this.getPyroModifier()));
         if (pyromancer.getPosition().equals('V')) {
             pyromancer.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND
-                    * Constants.IGNITE_PYRO));
-            pyromancer.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_PYRO
+                    * this.getPyroModifier()));
+            pyromancer.setOvertimeDmg(Math.round(igniteOvertime * this.getPyroModifier()
                     * Constants.VOLCANIC_LAND));
         } else {
-            pyromancer.takeDmg(Math.round(igniteDmg * Constants.IGNITE_PYRO));
+            pyromancer.takeDmg(Math.round(igniteDmg * this.getPyroModifier()));
         }
     }
 
@@ -68,13 +72,13 @@ public class Ignite extends Ability implements Visitor {
     public final void visit(final Rogue rogue) {
         rogue.setOvertimeType("ignite");
         rogue.setOvertimeDuration(Constants.IGNITE_ROUNDS);
-        rogue.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_ROGUE));
+        rogue.setOvertimeDmg(Math.round(igniteOvertime * this.getRogueModifier()));
         if (rogue.getPosition().equals('V')) {
-            rogue.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND * Constants.IGNITE_ROGUE));
-            rogue.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_ROGUE
+            rogue.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND * this.getRogueModifier()));
+            rogue.setOvertimeDmg(Math.round(igniteOvertime * this.getRogueModifier()
                     * Constants.VOLCANIC_LAND));
         } else {
-            rogue.takeDmg(Math.round(igniteDmg * Constants.IGNITE_ROGUE));
+            rogue.takeDmg(Math.round(igniteDmg * this.getRogueModifier()));
         }
     }
 
@@ -82,15 +86,15 @@ public class Ignite extends Ability implements Visitor {
     public final void visit(final Wizard wizard) {
         wizard.setOvertimeType("ignite");
         wizard.setOvertimeDuration(Constants.IGNITE_ROUNDS);
-        wizard.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_WIZARD));
+        wizard.setOvertimeDmg(Math.round(igniteOvertime * this.getWizardModifier()));
         if (wizard.getPosition().equals('V')) {
             wizard.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND
-                    * Constants.IGNITE_WIZARD));
-            wizard.setOvertimeDmg(Math.round(igniteOvertime * Constants.IGNITE_WIZARD
+                    * this.getWizardModifier()));
+            wizard.setOvertimeDmg(Math.round(igniteOvertime * this.getWizardModifier()
                     * Constants.VOLCANIC_LAND));
             wizard.addDamageDeflect(Math.round(igniteDmg * Constants.VOLCANIC_LAND));
         } else {
-            wizard.takeDmg(Math.round(igniteDmg * Constants.IGNITE_WIZARD));
+            wizard.takeDmg(Math.round(igniteDmg * this.getWizardModifier()));
             wizard.addDamageDeflect(Math.round(igniteDmg));
         }
     }

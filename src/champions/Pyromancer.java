@@ -17,6 +17,14 @@ public class Pyromancer extends Champion implements Visitable {
         super(x, y, arena);
         this.setHp(Constants.PYROMANCER_HP);
         this.type = "P";
+        this.setkFirstModifier(Constants.FIREBLAST_KNIGHT);
+        this.setkSecondModifier(Constants.IGNITE_KNIGHT);
+        this.setpFirstModifier(Constants.FIREBLAST_PYRO);
+        this.setpSecondModifier(Constants.IGNITE_PYRO);
+        this.setrFirstModifier(Constants.FIREBLAST_ROGUE);
+        this.setrSecondModifier(Constants.IGNITE_ROGUE);
+        this.setwFirstModifier(Constants.FIREBLAST_WIZARD);
+        this.setwSecondModifier(Constants.IGNITE_WIZARD);
     }
 
     public final String getType() {

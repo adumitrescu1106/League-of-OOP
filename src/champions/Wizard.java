@@ -17,6 +17,14 @@ public class Wizard extends Champion implements Visitable {
         super(x, y, arena);
         this.setHp(Constants.WIZARD_HP);
         this.type = "W";
+        this.setkFirstModifier(Constants.DRAIN_KNIGHT);
+        this.setkSecondModifier(Constants.DEFLECT_KNIGHT);
+        this.setpFirstModifier(Constants.DRAIN_PYRO);
+        this.setpSecondModifier(Constants.DEFLECT_PYRO);
+        this.setrFirstModifier(Constants.DRAIN_ROGUE);
+        this.setrSecondModifier(Constants.DEFLECT_ROGUE);
+        this.setwFirstModifier(Constants.DRAIN_WIZARD);
+        this.setwSecondModifier(0);
     }
 
     public final String getType() {

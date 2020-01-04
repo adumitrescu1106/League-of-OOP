@@ -5,21 +5,22 @@ import champions.Knight;
 import champions.Pyromancer;
 import champions.Rogue;
 import champions.Wizard;
+import helpers.Constants;
 
 public class DamageAngel extends Angel implements Visitor {
-    public void visit(Knight knight) {
-
+    public final void visit(Knight knight) {
+        knight.increaseAll(Constants.DAMAGE_ANGEL_K);
     }
 
-    public void visit(Pyromancer pyromancer) {
-
+    public final void visit(Pyromancer pyromancer) {
+        pyromancer.increaseAll(Constants.DAMAGE_ANGEL_P);
     }
 
-    public void visit(Rogue rogue) {
-
+    public final void visit(Rogue rogue) {
+        rogue.increaseAll(Constants.DAMAGE_ANGEL_R);
     }
 
-    public void visit(Wizard wizard) {
-
+    public final void visit(Wizard wizard) {
+        wizard.increaseAll(Constants.DAMAGE_ANGEL_W);
     }
 }

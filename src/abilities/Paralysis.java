@@ -11,6 +11,10 @@ public class Paralysis extends Ability implements Visitor {
 
     public Paralysis() {
         this.paralysisDmg = Constants.PARALYSIS_DMG;
+        this.setKnightModifier(Constants.PARALYSIS_KNIGHT);
+        this.setPyroModifier(Constants.PARALYSIS_PYRO);
+        this.setRogueModifier(Constants.PARALYSIS_ROGUE);
+        this.setWizardModifier(Constants.PARALYSIS_WIZARD);
     }
 
     public final int getParalysisDmg() {
@@ -25,12 +29,12 @@ public class Paralysis extends Ability implements Visitor {
         knight.setOvertimeType("paralysis");
         knight.setParalysis(Constants.PARALYSIS_ROUNDS);
         knight.setOvertimeDuration(Constants.PARALYSIS_ROUNDS);
-        knight.setOvertimeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_KNIGHT));
+        knight.setOvertimeDmg(Math.round(paralysisDmg * this.getKnightModifier()));
         // se seteaza tipul damage-ului overtime, durata si valoarea damage-ului
         if (knight.getPosition().equals('W')) {
             knight.takeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_KNIGHT));
-            knight.setOvertimeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_KNIGHT
+                    * this.getKnightModifier()));
+            knight.setOvertimeDmg(Math.round(paralysisDmg * this.getKnightModifier()
                     * Constants.WOODS_LAND));
             knight.setOvertimeType("paralysis_extra");
             knight.setParalysis(Constants.PARALYSIS_EXTRA);
@@ -38,7 +42,7 @@ public class Paralysis extends Ability implements Visitor {
             // se seteaza tipul damage-ului overtime, durata si valoarea damage-ului
             // in cazul in care se primesc bonusurile
         } else {
-            knight.takeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_KNIGHT));
+            knight.takeDmg(Math.round(paralysisDmg * this.getKnightModifier()));
         }
     }
 
@@ -47,17 +51,17 @@ public class Paralysis extends Ability implements Visitor {
         pyromancer.setOvertimeType("paralysis");
         pyromancer.setParalysis(Constants.PARALYSIS_ROUNDS);
         pyromancer.setOvertimeDuration(Constants.PARALYSIS_ROUNDS);
-        pyromancer.setOvertimeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_PYRO));
+        pyromancer.setOvertimeDmg(Math.round(paralysisDmg * this.getPyroModifier()));
         if (pyromancer.getPosition().equals('W')) {
             pyromancer.takeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_PYRO));
+                    * this.getPyroModifier()));
             pyromancer.setOvertimeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_PYRO));
+                    * this.getPyroModifier()));
             pyromancer.setOvertimeType("paralysis_extra");
             pyromancer.setParalysis(Constants.PARALYSIS_EXTRA);
             pyromancer.setOvertimeDuration(Constants.PARALYSIS_EXTRA);
         } else {
-            pyromancer.takeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_PYRO));
+            pyromancer.takeDmg(Math.round(paralysisDmg * this.getPyroModifier()));
         }
     }
 
@@ -66,17 +70,17 @@ public class Paralysis extends Ability implements Visitor {
         rogue.setOvertimeType("paralysis");
         rogue.setParalysis(Constants.PARALYSIS_ROUNDS);
         rogue.setOvertimeDuration(Constants.PARALYSIS_ROUNDS);
-        rogue.setOvertimeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_ROGUE));
+        rogue.setOvertimeDmg(Math.round(paralysisDmg * this.getRogueModifier()));
         if (rogue.getPosition().equals('W')) {
             rogue.takeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_ROGUE));
+                    * this.getRogueModifier()));
             rogue.setOvertimeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_ROGUE));
+                    * this.getRogueModifier()));
             rogue.setOvertimeType("paralysis_extra");
             rogue.setParalysis(Constants.PARALYSIS_EXTRA);
             rogue.setOvertimeDuration(Constants.PARALYSIS_EXTRA);
         } else {
-            rogue.takeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_ROGUE));
+            rogue.takeDmg(Math.round(paralysisDmg * this.getRogueModifier()));
         }
     }
 
@@ -85,19 +89,19 @@ public class Paralysis extends Ability implements Visitor {
         wizard.setOvertimeType("paralysis");
         wizard.setParalysis(Constants.PARALYSIS_ROUNDS);
         wizard.setOvertimeDuration(Constants.PARALYSIS_ROUNDS);
-        wizard.setOvertimeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_WIZARD));
+        wizard.setOvertimeDmg(Math.round(paralysisDmg * this.getWizardModifier()));
         if (wizard.getPosition().equals('W')) {
             wizard.takeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_WIZARD));
+                    * this.getWizardModifier()));
             wizard.setOvertimeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
-                    * Constants.PARALYSIS_WIZARD));
+                    * this.getWizardModifier()));
             wizard.setParalysis(Constants.PARALYSIS_EXTRA);
             wizard.setOvertimeDuration(Constants.PARALYSIS_EXTRA);
             wizard.setOvertimeType("paralysis_extra");
             // deflect info
             wizard.addDamageDeflect(Math.round(paralysisDmg * Constants.WOODS_LAND));
         } else {
-            wizard.takeDmg(Math.round(paralysisDmg * Constants.PARALYSIS_WIZARD));
+            wizard.takeDmg(Math.round(paralysisDmg * this.getWizardModifier()));
             wizard.addDamageDeflect(Math.round(paralysisDmg));
         }
     }

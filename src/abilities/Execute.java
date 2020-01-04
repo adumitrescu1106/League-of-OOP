@@ -13,6 +13,9 @@ public class Execute extends Ability implements Visitor {
     public Execute() {
         this.executeDmg = Constants.EXECUTE_DMG;
         this.level = 0;
+        this.setPyroModifier(Constants.EXECUTE_PYRO);
+        this.setRogueModifier(Constants.EXECUTE_ROGUE);
+        this.setWizardModifier(Constants.EXECUTE_WIZARD);
     }
 
     public final void visit(final Knight knight) {
@@ -37,9 +40,9 @@ public class Execute extends Ability implements Visitor {
             pyromancer.setHp(0);
         } else if (pyromancer.getPosition().equals('L')) {
             pyromancer.takeDmg(Math.round(executeDmg
-                    * Constants.EXECUTE_PYRO * Constants.KNIGHT_LAND));
+                    * this.getPyroModifier() * Constants.KNIGHT_LAND));
         } else {
-            pyromancer.takeDmg(Math.round(executeDmg * Constants.EXECUTE_PYRO));
+            pyromancer.takeDmg(Math.round(executeDmg * this.getPyroModifier()));
         }
     }
 
@@ -50,9 +53,9 @@ public class Execute extends Ability implements Visitor {
                 * (Constants.EXECUTE_KILL + Constants.EXECUTE_KILL_ADD * this.getLevel()))) {
             rogue.setHp(0);
         } else if (rogue.getPosition().equals('L')) {
-            rogue.takeDmg(Math.round(executeDmg * Constants.EXECUTE_ROGUE * Constants.KNIGHT_LAND));
+            rogue.takeDmg(Math.round(executeDmg * this.getRogueModifier() * Constants.KNIGHT_LAND));
         } else {
-            rogue.takeDmg(Math.round(executeDmg * Constants.EXECUTE_ROGUE));
+            rogue.takeDmg(Math.round(executeDmg * this.getRogueModifier()));
         }
     }
 
@@ -63,12 +66,12 @@ public class Execute extends Ability implements Visitor {
                 * (Constants.EXECUTE_KILL + Constants.EXECUTE_KILL_ADD * this.getLevel()))) {
             wizard.setHp(0);
         } else if (wizard.getPosition().equals('L')) {
-            wizard.takeDmg(Math.round(executeDmg * Constants.EXECUTE_WIZARD
+            wizard.takeDmg(Math.round(executeDmg * this.getWizardModifier()
                     * Constants.KNIGHT_LAND));
             //pentru deflect
             wizard.addDamageDeflect(Math.round(executeDmg * Constants.KNIGHT_LAND));
         } else {
-            wizard.takeDmg(Math.round(executeDmg * Constants.EXECUTE_WIZARD));
+            wizard.takeDmg(Math.round(executeDmg * this.getWizardModifier()));
             //pentru deflect
             wizard.addDamageDeflect(Math.round(executeDmg));
         }
