@@ -9,6 +9,11 @@ import helpers.Constants;
 
 
 public class DarkAngel extends Angel implements Visitor {
+    public DarkAngel(int x, int y) {
+        super(x, y);
+        this.setType("DarkAngel");
+    }
+
     public final void visit(Knight knight) {
         knight.takeDmg(Constants.DARK_KNIGHT_DMG);
         if (knight.getHp() <= 0) {

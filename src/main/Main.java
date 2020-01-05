@@ -1,6 +1,7 @@
 package main;
 
 import abilities.Ability;
+import angels.Angel;
 import champions.Champion;
 import fileio.FileSystem;
 import helpers.Constants;
@@ -16,13 +17,25 @@ public final class Main {
 
     public static void main(final String[] args) throws IOException {
         // Realizez initializarea inputului
-        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
+        String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/fightKKD.in";
+        String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/fightKKD.out";
+        GameInputLoader gameInputLoader = new GameInputLoader(input, output);
+        //GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
         GameInput gameInput = gameInputLoader.load();
+
         int rounds = gameInput.getRounds();
         ArrayList<ArrayList<Character>> arena = gameInput.getArena();
         ArrayList<ArrayList<Character>> moves = gameInput.getMoves();
         ArrayList<Champion> players = gameInput.getPlayers();
         ArrayList<ArrayList<Ability>> spells = gameInput.getSpells();
+        ArrayList<ArrayList<Angel>> angels = gameInput.getAngels();
+
+//        for (Champion player : players) {
+//            System.out.println(player);
+//        }
+        for (ArrayList<Angel> angel : angels) {
+            System.out.println(angel);
+        }
 
         // Desfasurarea jocului
         for (int i = 0; i < rounds; ++i) {
@@ -108,7 +121,8 @@ public final class Main {
             }
         }
         // Printez in fisier datele despre jucatori
-        FileSystem fs = new FileSystem(args[0], args[1]);
+       // FileSystem fs = new FileSystem(args[0], args[1]);
+        FileSystem fs = new FileSystem(input, output);
         print(players, fs);
     }
 

@@ -7,6 +7,11 @@ import champions.Rogue;
 import champions.Wizard;
 
 public class TheDoomer extends Angel implements Visitor {
+    public TheDoomer(int x, int y) {
+        super(x, y);
+        this.setType("TheDoomer");
+    }
+
     public final void visit(Knight knight) {
         knight.setHp(0);
         knight.setState("dead");

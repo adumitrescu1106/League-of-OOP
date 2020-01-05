@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class LifeGiver extends Angel implements Visitor {
+    public LifeGiver(int x, int y) {
+        super(x, y);
+        this.setType("LifeGiver");
+    }
+
     public final void visit(Knight knight) {
         knight.heal(Constants.LIFE_KNIGHT_DMG);
         if (knight.getHp() > (Constants.KNIGHT_HP + knight.getLevel() * Constants.KNIGHT_HP_UP)) {

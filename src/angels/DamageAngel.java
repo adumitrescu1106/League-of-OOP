@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class DamageAngel extends Angel implements Visitor {
+    public DamageAngel(int x, int y) {
+        super(x, y);
+        this.setType("DamageAngel");
+    }
+
     public final void visit(Knight knight) {
         knight.increaseAll(Constants.DAMAGE_ANGEL_K);
     }

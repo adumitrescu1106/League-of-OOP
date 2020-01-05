@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class Dracula extends Angel implements Visitor {
+    public Dracula(int x, int y) {
+        super(x, y);
+        this.setType("Dracula");
+    }
+
     public final void visit(Knight knight) {
         knight.decreaseAll(Constants.DRACULA_K);
         knight.takeDmg(Constants.DRACULA_KNIGHT_DMG);

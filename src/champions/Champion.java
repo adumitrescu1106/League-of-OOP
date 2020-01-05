@@ -345,4 +345,32 @@ public class Champion implements Visitable {
     public final void addXp(final int xpGained) {
         this.xp = this.xp + xpGained;
     }
+
+    @Override
+    public String toString() {
+        return "Champion{" +
+                "hp=" + hp +
+                ", xp=" + xp +
+                ", level=" + level +
+                ", xPosition=" + xPosition +
+                ", yPosition=" + yPosition +
+                ", paralysis=" + paralysis +
+                ", overtimeDuration=" + overtimeDuration +
+                ", overtimeType='" + overtimeType + '\'' +
+                ", overtimeDmg=" + overtimeDmg +
+                ", position=" + position +
+                ", backstabIndex=" + backstabIndex +
+                ", damageDeflect=" + damageDeflect +
+                ", state='" + state + '\'' +
+                ", fight=" + fight +
+                ", kFirstModifier=" + kFirstModifier +
+                ", kSecondModifier=" + kSecondModifier +
+                ", pFirstModifier=" + pFirstModifier +
+                ", pSecondModifier=" + pSecondModifier +
+                ", rFirstModifier=" + rFirstModifier +
+                ", rSecondModifier=" + rSecondModifier +
+                ", wFirstModifier=" + wFirstModifier +
+                ", wSecondModifier=" + wSecondModifier +
+                '}';
+    }
 }

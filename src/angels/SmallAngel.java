@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class SmallAngel extends Angel implements Visitor {
+    public SmallAngel(int x, int y) {
+        super(x, y);
+        this.setType("SmallAngel");
+    }
+
     public final void visit(Knight knight) {
         knight.increaseAll(Constants.SMALLANGEL_K);
         knight.heal(Constants.SMALLANGEL_KNIGHT_HEAL);

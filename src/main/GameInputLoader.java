@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 
 import abilities.*;
+import angels.*;
 import champions.*;
 import fileio.FileSystem;
 
@@ -21,6 +22,7 @@ public final class GameInputLoader {
         int mDimension = 0;
         ArrayList<ArrayList<Character>> arena = new ArrayList<ArrayList<Character>>();
         ArrayList<ArrayList<Character>> moves = new ArrayList<ArrayList<Character>>();
+        ArrayList<ArrayList<Angel>> angels = new ArrayList<ArrayList<Angel>>();
         ArrayList<Champion> players = new ArrayList<>();
         ArrayList<ArrayList<Ability>> spells = new ArrayList<ArrayList<Ability>>();
         int rounds = 0;
@@ -82,12 +84,60 @@ public final class GameInputLoader {
                 }
                 moves.add(newElements);
             }
+            for (int i = 0; i < rounds; ++i) {
+                int index = fs.nextInt();
+                ArrayList<Angel> newAngels = new ArrayList<>();
+                for (int j = 0; j < index; ++j) {
+
+
+                    String str = fs.nextWord();
+                    String[] arrayOfString = str.split(",", 5);
+                    String type = arrayOfString[0];
+                    int x = Integer.parseInt(arrayOfString[1]);
+                    int y = Integer.parseInt(arrayOfString[2]);
+                    switch (type) {
+                        case "DamageAngel":
+                            newAngels.add(new DamageAngel(x, y));
+                            break;
+                        case "DarkAngel":
+                            newAngels.add(new DarkAngel(x, y));
+                            break;
+                        case "Dracula":
+                            newAngels.add(new Dracula(x, y));
+                            break;
+                        case "GoodBoy":
+                            newAngels.add(new GoodBoy(x, y));
+                            break;
+                        case "LevelUpAngel":
+                            newAngels.add(new LevelUpAngel(x, y));
+                            break;
+                        case "LifeGiver":
+                            newAngels.add(new LifeGiver(x, y));
+                            break;
+                        case "SmallAngel":
+                            newAngels.add(new SmallAngel(x, y));
+                            break;
+                        case "Spawner":
+                            newAngels.add(new Spawner(x, y));
+                            break;
+                        case "TheDoomer":
+                            newAngels.add(new TheDoomer(x, y));
+                            break;
+                        case "XPAngel":
+                            newAngels.add(new XPAngel(x, y));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                angels.add(newAngels);
+            }
             fs.close();
 
         } catch (Exception e1) {
             e1.printStackTrace();
         }
 
-        return new GameInput(rounds, arena, players, nDimension, mDimension, moves, spells);
+        return new GameInput(rounds, arena, players, nDimension, mDimension, moves, spells, angels);
     }
 }

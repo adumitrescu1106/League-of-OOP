@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class Spawner extends Angel implements Visitor {
+    public Spawner(int x, int y) {
+        super(x, y);
+        this.setType("Spawner");
+    }
+
     public final void visit(Knight knight) {
         if (knight.getHp() <= 0) {
             knight.setHp(Constants.REVIVE_KNIGHT);

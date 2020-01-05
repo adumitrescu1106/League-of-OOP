@@ -7,6 +7,11 @@ import champions.Rogue;
 import champions.Wizard;
 
 public class LevelUpAngel extends Angel implements Visitor {
+    public LevelUpAngel(int x, int y) {
+        super(x, y);
+        this.setType("LevelUpAngel");
+    }
+
     public final void visit(Knight knight) {
         knight.levelUp();
         knight.setLevel(knight.getLevel() + 1);

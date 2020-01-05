@@ -15,7 +15,7 @@ public class Knight extends Champion implements Visitable {
     }
 
     public Knight(final int x, final int y, final ArrayList<ArrayList<Character>> arena) {
-        //super(x, y, arena);
+        super(x, y, arena);
         this.setHp(Constants.KNIGHT_HP);
         this.type = "K";
         this.setkFirstModifier(0);

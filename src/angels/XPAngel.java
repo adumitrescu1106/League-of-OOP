@@ -8,6 +8,11 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class XPAngel extends Angel implements Visitor {
+    public XPAngel(int x, int y) {
+        super(x, y);
+        this.setType("XPAngel");
+    }
+
     public final void visit(Knight knight) {
         knight.addXp(Constants.XP_KNIGHT);
         int level = knight.getLevel();
