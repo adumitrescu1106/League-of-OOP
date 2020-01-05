@@ -20,7 +20,7 @@ public final class Main {
         String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/fightKKD.in";
         String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/fightKKD.out";
         GameInputLoader gameInputLoader = new GameInputLoader(input, output);
-        //GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
+//        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
         GameInput gameInput = gameInputLoader.load();
 
         int rounds = gameInput.getRounds();
@@ -33,14 +33,20 @@ public final class Main {
 //        for (Champion player : players) {
 //            System.out.println(player);
 //        }
-        for (ArrayList<Angel> angel : angels) {
-            System.out.println(angel);
-        }
+//        for (ArrayList<Angel> angel : angels) {
+//            System.out.println(angel);
+//        }
+//         FileSystem fs = new FileSystem(args[0], args[1]);
+        FileSystem fs = new FileSystem(input, output);
 
         // Desfasurarea jocului
         for (int i = 0; i < rounds; ++i) {
+            printRound(i, fs);
+            //Spawn ingeri
+            printAngels(angels.get(i), fs);
             // miscarea pe harta
             for (int j = 0; j < players.size(); ++j) {
+
                 // in funtie de ce miscare trebuie sa faca, se realizeaza modificarile
                 // daca nu este paralizat, se misca
                 if (players.get(j).getParalysis() <= 0) {
@@ -114,21 +120,33 @@ public final class Main {
                     }
                 }
             }
+            // Efectul ingerilor
+            for (int j = 0; j < angels.get(i).size(); ++j) {
+                if (angels.get(i).get(j) != null) {
+                    for (int k = 0; k < players.size(); ++k) {
+                        if (players.get(k).getxPosition() == angels.get(i).get(j).getxPosition()
+                        && players.get(k).getyPosition() == angels.get(i).get(j).getyPosition()) {
+                            players.get(k).accept(angels.get(i).get(j));
+                            printAngelHelp(angels.get(i).get(j), players.get(k), k, fs);
+                        }
+                    }
+                }
+            }
             // decrementez durata efectelor overtime
             for (Champion player : players) {
                 player.setOvertimeDuration(player.getOvertimeDuration() - 1);
                 player.setFight(true);
             }
+            fs.writeNewLine();
         }
         // Printez in fisier datele despre jucatori
-       // FileSystem fs = new FileSystem(args[0], args[1]);
-        FileSystem fs = new FileSystem(input, output);
         print(players, fs);
     }
 
     // functia de printare a datelor jucatorilor
     private static void print(final ArrayList<Champion> players, final FileSystem fs)
             throws IOException {
+        fs.writeWord("~~ Results ~~" + "\n");
         for (Champion player : players) {
             if (player.getHp() <= 0) {
                 fs.writeWord(player.getType());
@@ -151,6 +169,32 @@ public final class Main {
         }
         fs.close();
     }
+
+    private static void printRound(final int round, final FileSystem fs)
+            throws IOException {
+        fs.writeWord("~~ Round " + (round + 1) + " ~~" + "\n");
+    }
+
+    private static void printAngels(final ArrayList<Angel> angels, final FileSystem fs)
+            throws IOException {
+        for (Angel angel : angels) {
+            fs.writeWord("Angel " + angel.getType() + " was spawned at "
+                    + angel.getxPosition() + " " + angel.getyPosition() + "\n");
+        }
+    }
+    private static void printAngelHelp(final Angel angel, final Champion player,
+                                       final int index, final FileSystem fs)
+            throws IOException {
+        if (angel.getType().equals("TheDoomer")) {
+            fs.writeWord(angel.getType() + " hit "
+                    + player.getLongType() + " " + index + "\n");
+            fs.writeWord("Player " + player.getLongType() + " " + index + " was killed by an angel" + "\n");
+        } else {
+            fs.writeWord(angel.getType() + " helped "
+                    + player.getLongType() + " " + index + "\n");
+        }
+    }
+
     // functie care da experienta jucatorului care si-a omorat adversarul
     private static void giveXpIfnecessary(final Champion champion, final int j,
                                           final Champion secondChampion, final int k,

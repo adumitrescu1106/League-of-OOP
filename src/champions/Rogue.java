@@ -7,17 +7,20 @@ import java.util.ArrayList;
 
 public class Rogue extends Champion implements Visitable {
     private String type;
+    private String longType;
 
     public Rogue() {
         super();
         this.setHp(Constants.ROGUE_HP);
         this.type = "R";
+        this.longType = "Rogue";
     }
 
     public Rogue(final int x, final int y, final ArrayList<ArrayList<Character>> arena) {
         super(x, y, arena);
         this.setHp(Constants.ROGUE_HP);
         this.type = "R";
+        this.longType = "Rogue";
         this.setkFirstModifier(Constants.BACKSTAB_KNIGHT);
         this.setkSecondModifier(Constants.PARALYSIS_KNIGHT);
         this.setpFirstModifier(Constants.BACKSTAB_PYRO);
@@ -34,6 +37,14 @@ public class Rogue extends Champion implements Visitable {
 
     public final void setType(final String type) {
         this.type = type;
+    }
+
+    public final String getLongType() {
+        return longType;
+    }
+
+    public final void setLongType(String longType) {
+        this.longType = longType;
     }
 
     // se creste hp ul maxim si se face heal la 100% cand da level up

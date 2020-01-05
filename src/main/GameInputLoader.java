@@ -88,8 +88,6 @@ public final class GameInputLoader {
                 int index = fs.nextInt();
                 ArrayList<Angel> newAngels = new ArrayList<>();
                 for (int j = 0; j < index; ++j) {
-
-
                     String str = fs.nextWord();
                     String[] arrayOfString = str.split(",", 5);
                     String type = arrayOfString[0];

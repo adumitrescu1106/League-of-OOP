@@ -7,17 +7,20 @@ import java.util.ArrayList;
 
 public class Knight extends Champion implements Visitable {
     private String type;
+    private String longType;
 
     public Knight() {
         super();
         this.setHp(Constants.KNIGHT_HP);
         this.type = "K";
+        this.longType = "Knight";
     }
 
     public Knight(final int x, final int y, final ArrayList<ArrayList<Character>> arena) {
         super(x, y, arena);
         this.setHp(Constants.KNIGHT_HP);
         this.type = "K";
+        this.longType = "Knight";
         this.setkFirstModifier(0);
         this.setkSecondModifier(Constants.SLAM_KNIGHT);
         this.setpFirstModifier(Constants.EXECUTE_PYRO);
@@ -34,6 +37,14 @@ public class Knight extends Champion implements Visitable {
 
     public final void setType(final String type) {
         this.type = type;
+    }
+
+    public final String getLongType() {
+        return longType;
+    }
+
+    public final void setLongType(String longType) {
+        this.longType = longType;
     }
 
     public final void accept(final Visitor v) {

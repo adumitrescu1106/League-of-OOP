@@ -254,7 +254,6 @@ public class Champion implements Visitable {
     public final float getwSecondModifier() {
         return wSecondModifier;
     }
-    
     public final void increaseKfirst(float increase) {
         this.setkFirstModifier(this.getkFirstModifier() + increase);
     }
@@ -279,7 +278,6 @@ public class Champion implements Visitable {
     public final void increaseWsecond(float increase) {
         this.setwSecondModifier(this.getwSecondModifier() + increase);
     }
-    
     public final void increaseAll(float percentage) {
         this.increaseKfirst(percentage);
         this.increaseKsecond(percentage);
@@ -301,7 +299,6 @@ public class Champion implements Visitable {
         this.decreaseWfirst(percentage);
         this.decreaseWsecond(percentage);
     }
-    
     public final void decreaseKfirst(float decrease) {
         this.setkFirstModifier(this.getkFirstModifier() - decrease);
     }
@@ -335,7 +332,9 @@ public class Champion implements Visitable {
     public String getType() {
         return "a";
     }
-
+    public String getLongType() {
+        return "a";
+    }
     @Override
     public void accept(final Visitor v) {
 
