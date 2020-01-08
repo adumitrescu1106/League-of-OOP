@@ -23,7 +23,7 @@ public class LifeGiver extends Angel implements Visitor {
     public final void visit(Pyromancer pyromancer) {
         pyromancer.heal(Constants.LIFE_PYRO_DMG);
         if (pyromancer.getHp() > (Constants.PYROMANCER_HP + pyromancer.getLevel()
-                * Constants.KNIGHT_HP_UP)) {
+                * Constants.PYROMANCER_HP_UP)) {
             pyromancer.setHp(Constants.PYROMANCER_HP + pyromancer.getLevel()
                     * Constants.PYROMANCER_HP_UP);
         }

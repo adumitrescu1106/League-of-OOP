@@ -19,6 +19,8 @@ public class XPAngel extends Angel implements Visitor {
         knight.setLevel((knight.getXp() - Constants.EXPERIENCE) / Constants.FRACTION_EXP);
         if (knight.getLevel() > level) {
             knight.levelUp();
+        } else {
+            knight.setLevel(level);
         }
     }
 
@@ -28,6 +30,8 @@ public class XPAngel extends Angel implements Visitor {
         pyromancer.setLevel((pyromancer.getXp() - Constants.EXPERIENCE) / Constants.FRACTION_EXP);
         if (pyromancer.getLevel() > level) {
             pyromancer.levelUp();
+        } else {
+            pyromancer.setLevel(level);
         }
     }
 
@@ -37,6 +41,8 @@ public class XPAngel extends Angel implements Visitor {
         rogue.setLevel((rogue.getXp() - Constants.EXPERIENCE) / Constants.FRACTION_EXP);
         if (rogue.getLevel() > level) {
             rogue.levelUp();
+        } else {
+            rogue.setLevel(level);
         }
     }
 
@@ -46,6 +52,8 @@ public class XPAngel extends Angel implements Visitor {
         wizard.setLevel((wizard.getXp() - Constants.EXPERIENCE) / Constants.FRACTION_EXP);
         if (wizard.getLevel() > level) {
             wizard.levelUp();
+        } else {
+            wizard.setLevel(level);
         }
     }
 }

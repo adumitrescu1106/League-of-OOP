@@ -17,8 +17,8 @@ public final class Main {
 
     public static void main(final String[] args) throws IOException {
         // Realizez initializarea inputului
-        String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/fightKKD.in";
-        String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/fightKKD.out";
+        String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/fightKPV.in";
+        String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/fightKPV.out";
         GameInputLoader gameInputLoader = new GameInputLoader(input, output);
 //        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
         GameInput gameInput = gameInputLoader.load();
@@ -42,11 +42,8 @@ public final class Main {
         // Desfasurarea jocului
         for (int i = 0; i < rounds; ++i) {
             printRound(i, fs);
-            //Spawn ingeri
-            printAngels(angels.get(i), fs);
             // miscarea pe harta
             for (int j = 0; j < players.size(); ++j) {
-
                 // in funtie de ce miscare trebuie sa faca, se realizeaza modificarile
                 // daca nu este paralizat, se misca
                 if (players.get(j).getParalysis() <= 0) {
@@ -103,19 +100,19 @@ public final class Main {
                                 && players.get(k).getType().equals("W")) {
                             // tratez cazul in care sunt amandoi wizard ca pe unul normal
                             battle(players.get(j), j, players.get(k), k, spells);
-                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells);
+                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells, fs);
                         } else if (players.get(j).getType().equals("W")) {
                             // daca wizardul este primul (pentru deflect),
                             // isi da al doilea abilitatile
                             wizardBattle(players.get(j), j, players.get(k), k, spells);
-                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells);
+                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells, fs);
                         } else if (players.get(k).getType().equals("W")) {
                             // daca wizardul este al doilea (pentru deflect) , se pastreaza ordinea
                             wizardBattle(players.get(k), k, players.get(j), j, spells);
-                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells);
+                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells, fs);
                         } else {
                             battle(players.get(j), j, players.get(k), k, spells);
-                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells);
+                            giveXpIfnecessary(players.get(j), j, players.get(k), k, spells, fs);
                         }
                     }
                 }
@@ -123,11 +120,19 @@ public final class Main {
             // Efectul ingerilor
             for (int j = 0; j < angels.get(i).size(); ++j) {
                 if (angels.get(i).get(j) != null) {
+                    printAngel(angels.get(i).get(j), fs);
                     for (int k = 0; k < players.size(); ++k) {
+                        ///printAngel(angels.get(i).get(j), fs);
                         if (players.get(k).getxPosition() == angels.get(i).get(j).getxPosition()
-                        && players.get(k).getyPosition() == angels.get(i).get(j).getyPosition()) {
+                        && players.get(k).getyPosition() == angels.get(i).get(j).getyPosition()
+                                && players.get(k).getState().equals("alive")) {
                             players.get(k).accept(angels.get(i).get(j));
                             printAngelHelp(angels.get(i).get(j), players.get(k), k, fs);
+                            adjustModifiers(players.get(k), spells.get(k));
+                            if (angels.get(i).get(j).getType().equals("LevelUpAngel")) {
+                                levelUpAbilityAngel(i, spells);
+                                printLevelUp(players.get(k), fs, k);
+                            }
                         }
                     }
                 }
@@ -141,6 +146,17 @@ public final class Main {
         }
         // Printez in fisier datele despre jucatori
         print(players, fs);
+    }
+
+    private static void adjustModifiers(Champion champion, ArrayList<Ability> abilities) {
+        abilities.get(0).setKnightModifier(champion.getkFirstModifier());
+        abilities.get(0).setPyroModifier(champion.getpFirstModifier());
+        abilities.get(0).setRogueModifier(champion.getrFirstModifier());
+        abilities.get(0).setWizardModifier(champion.getwFirstModifier());
+        abilities.get(1).setKnightModifier(champion.getkSecondModifier());
+        abilities.get(1).setPyroModifier(champion.getpSecondModifier());
+        abilities.get(1).setRogueModifier(champion.getrSecondModifier());
+        abilities.get(1).setWizardModifier(champion.getwSecondModifier());
     }
 
     // functia de printare a datelor jucatorilor
@@ -175,31 +191,45 @@ public final class Main {
         fs.writeWord("~~ Round " + (round + 1) + " ~~" + "\n");
     }
 
-    private static void printAngels(final ArrayList<Angel> angels, final FileSystem fs)
+    private static void printAngel(final Angel angel, final FileSystem fs)
             throws IOException {
-        for (Angel angel : angels) {
             fs.writeWord("Angel " + angel.getType() + " was spawned at "
                     + angel.getxPosition() + " " + angel.getyPosition() + "\n");
-        }
     }
+
     private static void printAngelHelp(final Angel angel, final Champion player,
                                        final int index, final FileSystem fs)
             throws IOException {
-        if (angel.getType().equals("TheDoomer")) {
+        if (angel.getType().equals("TheDoomer") || angel.getType().equals("Dracula")) {
             fs.writeWord(angel.getType() + " hit "
                     + player.getLongType() + " " + index + "\n");
-            fs.writeWord("Player " + player.getLongType() + " " + index + " was killed by an angel" + "\n");
+            if (player.getState().equals("dead")) {
+                fs.writeWord("Player " + player.getLongType() + " " + index + " was killed by an angel" + "\n");
+            }
         } else {
             fs.writeWord(angel.getType() + " helped "
                     + player.getLongType() + " " + index + "\n");
         }
     }
 
+    private static void printLevelUp(final Champion champion, final FileSystem fs, final int index)
+            throws IOException {
+        fs.writeWord(champion.getLongType() + " " + index + " reached level " + champion.getLevel() + "\n");
+    }
+
+
+    private static void levelUpAbilityAngel(final int index, final ArrayList<ArrayList<Ability>> spells) {
+        spells.get(index).get(0).levelUP();
+        spells.get(index).get(1).levelUP();
+    }
+
     // functie care da experienta jucatorului care si-a omorat adversarul
     private static void giveXpIfnecessary(final Champion champion, final int j,
                                           final Champion secondChampion, final int k,
-                                          final ArrayList<ArrayList<Ability>> spells) {
+                                          final ArrayList<ArrayList<Ability>> spells, final FileSystem fs) throws IOException {
         if (champion.getState().equals("alive") && secondChampion.getState().equals("dead")) {
+            fs.writeWord("Player " + secondChampion.getLongType() + " " + k + " was killed by "
+                    + champion.getLongType() + " " + j + "\n");
             int level = champion.getLevel();
             champion.addXp(Math.max(0, Constants.EXPERIENCE - (champion.getLevel()
                     - secondChampion.getLevel()) * Constants.SMALL_EXPERIENCE));
@@ -216,6 +246,8 @@ public final class Main {
             }
         } else if (champion.getState().equals("dead")
                 && secondChampion.getState().equals("alive")) {
+            fs.writeWord("Player " + champion.getLongType() + " " + j + " was killed by "
+                    + secondChampion.getLongType() + " " + k + "\n");
             int level = secondChampion.getLevel();
             secondChampion.addXp(Math.max(0, Constants.EXPERIENCE - (secondChampion.getLevel()
                     - champion.getLevel()) * Constants.SMALL_EXPERIENCE));
@@ -228,6 +260,12 @@ public final class Main {
                     spells.get(k).get(1).levelUP();
                 }
             }
+        } else if (champion.getState().equals("dead")
+                && secondChampion.getState().equals("dead")) {
+            fs.writeWord("Player " + secondChampion.getLongType() + " " + k + " was killed by "
+                    + champion.getLongType() + " " + j + "\n");
+            fs.writeWord("Player " + champion.getLongType() + " " + j + " was killed by "
+                    + secondChampion.getLongType() + " " + k + "\n");
         }
     }
 

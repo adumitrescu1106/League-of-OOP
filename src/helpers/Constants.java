@@ -2,6 +2,7 @@ package helpers;
 
 public class Constants {
     //general
+    public static final int LEVEL_EXPERIENCE = 250;
     public static final int EXPERIENCE = 200;
     public static final int SMALL_EXPERIENCE = 40;
     public static final int FRACTION_EXP = 50;
