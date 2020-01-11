@@ -41,8 +41,13 @@ public class Slam extends Ability implements Visitor {
     public final void visit(final Rogue rogue) {
         if (rogue.getPosition().equals('L')) {
             rogue.takeDmg(Math.round(slamDmg * this.getRogueModifier() * Constants.KNIGHT_LAND));
+
+//            System.out.println("slam " + Math.round(slamDmg * this.getRogueModifier() * Constants.KNIGHT_LAND));
+//            System.out.println("slam coef " + this.getRogueModifier());
         } else {
             rogue.takeDmg(Math.round(slamDmg * this.getRogueModifier()));
+//            System.out.println("slam " + Math.round(slamDmg * this.getRogueModifier()));
+//            System.out.println("slam coef " + this.getRogueModifier());
         }
         rogue.setParalysis(1);
     }

@@ -55,4 +55,18 @@ public class Rogue extends Champion implements Visitable {
     public final void accept(final Visitor v) {
         v.visit(this);
     }
+
+    public final void playStyle() {
+        if (((Constants.ROGUE_HP + Constants.ROGUE_HP_UP * this.getLevel())
+                / Constants.STRATEGY_R_1) < this.getHp() && this.getHp()
+                < ((Constants.ROGUE_HP + Constants.ROGUE_HP_UP * this.getLevel())
+                / Constants.STRATEGY_R_2)) {
+            this.takeDmg(this.getHp() / Constants.LIFE_ROGUE_AGGR);
+            this.increaseAll(Constants.AGGRESSIVE_R);
+        } else if (this.getHp() < ((Constants.ROGUE_HP + Constants.ROGUE_HP_UP * this.getLevel())
+                / Constants.STRATEGY_R_1)) {
+            this.heal(this.getHp() / Constants.LIFE_ROGUE_DEF);
+            this.decreaseAll(Constants.DEFENSIVE_R);
+        }
+    }
 }

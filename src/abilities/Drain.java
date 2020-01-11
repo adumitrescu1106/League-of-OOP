@@ -40,6 +40,7 @@ public class Drain extends Ability implements Visitor {
             knight.takeDmg(Math.round(hpPercent * this.getKnightModifier()
                     * Math.min(Constants.HP_PERCENT * (Constants.KNIGHT_HP
                     + Constants.KNIGHT_HP_UP * knight.getLevel()), knight.getHp())));
+//            System.out.println("drain" + this.getKnightModifier());
         }
     }
 

@@ -34,6 +34,8 @@ public class Deflect extends Ability implements Visitor {
         } else {
             knight.takeDmg(Math.round(deflectPercent
                     * this.getKnightModifier() * knight.getdamageDeflect()));
+//            System.out.println("deflect" + Math.round(deflectPercent
+//                    * this.getKnightModifier() * knight.getdamageDeflect()));
         }
     }
 

@@ -34,6 +34,10 @@ public class Paralysis extends Ability implements Visitor {
         if (knight.getPosition().equals('W')) {
             knight.takeDmg(Math.round(paralysisDmg * Constants.WOODS_LAND
                     * this.getKnightModifier()));
+
+//            System.out.println("PARALYSIS " + Math.round(paralysisDmg * Constants.WOODS_LAND
+//                    * this.getKnightModifier()));
+//            System.out.println("PARALYSIS coef" + this.getKnightModifier());
             knight.setOvertimeDmg(Math.round(paralysisDmg * this.getKnightModifier()
                     * Constants.WOODS_LAND));
             knight.setOvertimeType("paralysis_extra");
@@ -43,6 +47,8 @@ public class Paralysis extends Ability implements Visitor {
             // in cazul in care se primesc bonusurile
         } else {
             knight.takeDmg(Math.round(paralysisDmg * this.getKnightModifier()));
+//            System.out.println("PARALYSIS " + Math.round(paralysisDmg * this.getKnightModifier()));
+//            System.out.println("PARALYSIS coef" + this.getKnightModifier());
         }
     }
 

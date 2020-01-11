@@ -35,6 +35,9 @@ public class Backstab extends Ability implements Visitor {
             if (knight.getPosition().equals('W')) {
                 knight.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
                         * this.getKnightModifier() * Constants.BACKSTAB_CRIT));
+
+//                System.out.println("BACKSTAB " + Math.round(backstabDmg * Constants.WOODS_LAND
+//                        * this.getKnightModifier() * Constants.BACKSTAB_CRIT));
                 knight.setBackstabIndex(Constants.BACKSTAB_INDEX);
                 return;
             } else {
@@ -44,9 +47,16 @@ public class Backstab extends Ability implements Visitor {
         if (knight.getPosition().equals('W')) {
             knight.takeDmg(Math.round(backstabDmg * Constants.WOODS_LAND
                     * this.getKnightModifier()));
+
+//            System.out.println("BACKSTAB " + Math.round(backstabDmg * Constants.WOODS_LAND
+//                    * this.getKnightModifier()));
+//            System.out.println("BACKSTAB coef " + this.getKnightModifier());
             knight.setBackstabIndex(knight.getBackstabIndex() - 1);
         } else {
             knight.takeDmg(Math.round(backstabDmg * this.getKnightModifier()));
+
+//            System.out.println("BACKSTAB " + Math.round(backstabDmg * this.getKnightModifier()));
+//            System.out.println("BACKSTAB coef " + this.getKnightModifier());
             knight.setBackstabIndex(knight.getBackstabIndex() - 1);
         }
     }

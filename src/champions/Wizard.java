@@ -54,4 +54,18 @@ public class Wizard extends Champion implements Visitable {
     public final void accept(final Visitor v) {
         v.visit(this);
     }
+
+    public final void playStyle() {
+        if (((Constants.WIZARD_HP + Constants.WIZARD_HP_UP * this.getLevel())
+                / Constants.STRATEGY_W_1) < this.getHp() && this.getHp()
+                < ((Constants.WIZARD_HP + Constants.WIZARD_HP_UP * this.getLevel())
+                / Constants.STRATEGY_W_2)) {
+            this.takeDmg(this.getHp() / Constants.LIFE_WIZARD_AGGR);
+            this.increaseAll(Constants.AGGRESSIVE_W);
+        } else if (this.getHp() < ((Constants.WIZARD_HP + Constants.WIZARD_HP_UP * this.getLevel())
+                / Constants.STRATEGY_W_1)) {
+        this.heal(this.getHp() / Constants.LIFE_WIZARD_DEF);
+        this.decreaseAll(Constants.DEFENSIVE_W);
+        }
+    }
 }

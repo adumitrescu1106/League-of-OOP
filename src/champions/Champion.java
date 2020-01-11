@@ -5,7 +5,7 @@ import abilities.Visitor;
 
 import java.util.ArrayList;
 
-public class Champion implements Visitable {
+public class Champion implements Visitable, Strategy {
     private int hp;
     private int xp;
     private int level;
@@ -371,5 +371,11 @@ public class Champion implements Visitable {
                 ", wFirstModifier=" + wFirstModifier +
                 ", wSecondModifier=" + wSecondModifier +
                 '}';
+    }
+
+
+    @Override
+    public void playStyle() {
+
     }
 }

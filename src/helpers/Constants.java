@@ -138,4 +138,36 @@ public class Constants {
     public static final int SMALLANGEL_PYRO_HEAL = 15;
     public static final int SMALLANGEL_ROGUE_HEAL = 20;
     public static final int SMALLANGEL_WIZARD_HEAL = 25;
+    //Strategy
+    public static final float AGGRESSIVE_K = 0.5f;
+    public static final float AGGRESSIVE_P = 0.7f;
+    public static final float AGGRESSIVE_R = 0.4f;
+    public static final float AGGRESSIVE_W = 0.6f;
+    public static final float DEFENSIVE_K = 0.2f;
+    public static final float DEFENSIVE_P = 0.3f;
+    public static final float DEFENSIVE_R = 0.1f;
+    public static final float DEFENSIVE_W = 0.2f;
+    //Strategy HP constants
+    public static final int LIFE_KNIGHT_AGGR = 5;
+    public static final int LIFE_PYRO_AGGR = 4;
+    public static final int LIFE_WIZARD_AGGR = 10;
+    public static final int LIFE_ROGUE_AGGR = 7;
+    public static final int LIFE_KNIGHT_DEF = 4;
+    public static final int LIFE_PYRO_DEF = 3;
+    public static final int LIFE_WIZARD_DEF = 5;
+    public static final int LIFE_ROGUE_DEF = 2;
+    //Max HP Strategy constants
+    public static final int STRATEGY_K_1 = 3;
+    public static final int STRATEGY_K_2 = 2;
+    public static final int STRATEGY_P_1 = 4;
+    public static final int STRATEGY_P_2 = 3;
+    public static final int STRATEGY_R_1 = 7;
+    public static final int STRATEGY_R_2 = 5;
+    public static final int STRATEGY_W_1 = 4;
+    public static final int STRATEGY_W_2 = 2;
+    // level up angel
+    public static final float LEVEL_ANGEL_K = 0.1f;
+    public static final float LEVEL_ANGEL_P = 0.2f;
+    public static final float LEVEL_ANGEL_R = 0.15f;
+    public static final float LEVEL_ANGEL_W = 0.25f;
 }

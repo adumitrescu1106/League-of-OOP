@@ -17,10 +17,10 @@ public final class Main {
 
     public static void main(final String[] args) throws IOException {
         // Realizez initializarea inputului
-        String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/fightKPV.in";
-        String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/fightKPV.out";
-        GameInputLoader gameInputLoader = new GameInputLoader(input, output);
-//        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
+//        String input = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/in/dense.in";
+//        String output = "/home/andrei/Documents/TemaPOO-Etapa2/src/checker/resources/out/dense.out";
+//        GameInputLoader gameInputLoader = new GameInputLoader(input, output);
+        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
         GameInput gameInput = gameInputLoader.load();
 
         int rounds = gameInput.getRounds();
@@ -29,6 +29,7 @@ public final class Main {
         ArrayList<Champion> players = gameInput.getPlayers();
         ArrayList<ArrayList<Ability>> spells = gameInput.getSpells();
         ArrayList<ArrayList<Angel>> angels = gameInput.getAngels();
+        int level;
 
 //        for (Champion player : players) {
 //            System.out.println(player);
@@ -36,8 +37,8 @@ public final class Main {
 //        for (ArrayList<Angel> angel : angels) {
 //            System.out.println(angel);
 //        }
-//         FileSystem fs = new FileSystem(args[0], args[1]);
-        FileSystem fs = new FileSystem(input, output);
+         FileSystem fs = new FileSystem(args[0], args[1]);
+//        FileSystem fs = new FileSystem(input, output);
 
         // Desfasurarea jocului
         for (int i = 0; i < rounds; ++i) {
@@ -47,20 +48,20 @@ public final class Main {
                 // in funtie de ce miscare trebuie sa faca, se realizeaza modificarile
                 // daca nu este paralizat, se misca
                 if (players.get(j).getParalysis() <= 0) {
-                    if (moves.get(i).get(j).equals('U')) {
+                    if (moves.get(i).get(j).equals('U') && players.get(j).getxPosition() > 0) {
                         players.get(j).setxPosition(players.get(j).getxPosition() - 1);
                         // se updateaza tipul de teren pe care se afla, dupa ce se misca
                         players.get(j).setPosition(arena.get(players.get(j).getxPosition())
                                 .get(players.get(j).getyPosition()));
-                    } else if (moves.get(i).get(j).equals('D')) {
+                    } else if (moves.get(i).get(j).equals('D') && players.get(j).getxPosition() < arena.get(0).size()) {
                         players.get(j).setxPosition(players.get(j).getxPosition() + 1);
                         players.get(j).setPosition(arena.get(players.get(j).getxPosition())
                                 .get(players.get(j).getyPosition()));
-                    } else if (moves.get(i).get(j).equals('L')) {
+                    } else if (moves.get(i).get(j).equals('L') && players.get(j).getyPosition() > 0) {
                         players.get(j).setyPosition(players.get(j).getyPosition() - 1);
                         players.get(j).setPosition(arena.get(players.get(j).getxPosition())
                                 .get(players.get(j).getyPosition()));
-                    } else if (moves.get(i).get(j).equals('R')) {
+                    } else if (moves.get(i).get(j).equals('R') && players.get(j).getyPosition() < arena.size()) {
                         players.get(j).setyPosition(players.get(j).getyPosition() + 1);
                         players.get(j).setPosition(arena.get(players.get(j).getxPosition())
                                 .get(players.get(j).getyPosition()));
@@ -89,6 +90,14 @@ public final class Main {
                     player.setState("dead");
                 }
             }
+            // fiecare jucator isi stabileste strategia
+            for (int j = 0; j < players.size(); ++j) {
+                if (players.get(j).getState().equals("alive") && players.get(j).getParalysis() < 0) {
+                    players.get(j).playStyle();
+                    adjustModifiers(players.get(j), spells.get(j));
+                }
+            }
+
             for (int j = 0; j < players.size() - 1; j++) {
                 for (int k = j + 1; k < players.size(); k++) {
                     if (players.get(j).getState().equals("alive")
@@ -122,30 +131,49 @@ public final class Main {
                 if (angels.get(i).get(j) != null) {
                     printAngel(angels.get(i).get(j), fs);
                     for (int k = 0; k < players.size(); ++k) {
-                        ///printAngel(angels.get(i).get(j), fs);
+                        level = players.get(k).getLevel();
                         if (players.get(k).getxPosition() == angels.get(i).get(j).getxPosition()
-                        && players.get(k).getyPosition() == angels.get(i).get(j).getyPosition()
-                                && players.get(k).getState().equals("alive")) {
-                            players.get(k).accept(angels.get(i).get(j));
-                            printAngelHelp(angels.get(i).get(j), players.get(k), k, fs);
-                            adjustModifiers(players.get(k), spells.get(k));
-                            if (angels.get(i).get(j).getType().equals("LevelUpAngel")) {
-                                levelUpAbilityAngel(i, spells);
-                                printLevelUp(players.get(k), fs, k);
+                        && players.get(k).getyPosition() == angels.get(i).get(j).getyPosition()) {
+                            if (players.get(k).getState().equals("alive")) {
+                                if (!angels.get(i).get(j).getType().equals("Spawner")) {
+                                    players.get(k).accept(angels.get(i).get(j));
+                                    printAngelHelp(angels.get(i).get(j), players.get(k), k, fs);
+
+                                    if (angels.get(i).get(j).getType().equals("LevelUpAngel")) {
+                                        levelUpAbilityAngel(k, spells);
+                                        // printLevelUp(players.get(k), fs, k, players.get(k).getLevel());
+                                    }
+                                    adjustModifiers(players.get(k), spells.get(k));
+                                }
+                            } else if (players.get(k).getState().equals("dead")
+                                    && angels.get(i).get(j).getType().equals("Spawner")) {
+                                printAngelHelp(angels.get(i).get(j), players.get(k), k, fs);
+                                players.get(k).accept(angels.get(i).get(j));
                             }
+                        }
+
+                        if (players.get(k).getLevel() != level) {
+                            for (int l = level + 1; l <=  players.get(k).getLevel(); l++) {
+                                printLevelUp(players.get(k), fs, k, l);
+                            }
+                           // printLevelUp(players.get(k), fs, k, players.get(k).getLevel());
                         }
                     }
                 }
             }
             // decrementez durata efectelor overtime
             for (Champion player : players) {
+                //System.out.println(player.getXp());
+                //System.out.println(player.getHp());
                 player.setOvertimeDuration(player.getOvertimeDuration() - 1);
                 player.setFight(true);
             }
             fs.writeNewLine();
+//            print(players, fs);
         }
         // Printez in fisier datele despre jucatori
         print(players, fs);
+//        fs.close();
     }
 
     private static void adjustModifiers(Champion champion, ArrayList<Ability> abilities) {
@@ -164,7 +192,7 @@ public final class Main {
             throws IOException {
         fs.writeWord("~~ Results ~~" + "\n");
         for (Champion player : players) {
-            if (player.getHp() <= 0) {
+            if (player.getState().equals("dead")) {
                 fs.writeWord(player.getType());
                 fs.writeWord(" dead");
                 fs.writeNewLine();
@@ -200,7 +228,7 @@ public final class Main {
     private static void printAngelHelp(final Angel angel, final Champion player,
                                        final int index, final FileSystem fs)
             throws IOException {
-        if (angel.getType().equals("TheDoomer") || angel.getType().equals("Dracula")) {
+        if (angel.getType().equals("TheDoomer") || angel.getType().equals("Dracula") || angel.getType().equals("DarkAngel")) {
             fs.writeWord(angel.getType() + " hit "
                     + player.getLongType() + " " + index + "\n");
             if (player.getState().equals("dead")) {
@@ -209,12 +237,15 @@ public final class Main {
         } else {
             fs.writeWord(angel.getType() + " helped "
                     + player.getLongType() + " " + index + "\n");
+            if (angel.getType().equals("Spawner")) {
+                fs.writeWord("Player " + player.getLongType() + " " + index + " was brought to life by an angel" + "\n");
+            }
         }
     }
 
-    private static void printLevelUp(final Champion champion, final FileSystem fs, final int index)
+    private static void printLevelUp(final Champion champion, final FileSystem fs, final int index, final int level)
             throws IOException {
-        fs.writeWord(champion.getLongType() + " " + index + " reached level " + champion.getLevel() + "\n");
+        fs.writeWord(champion.getLongType() + " " + index + " reached level " + level + "\n");
     }
 
 
@@ -238,6 +269,9 @@ public final class Main {
             if (champion.getLevel() > level) {
                 // level up campionului
                 champion.levelUp();
+                for (int i = level + 1; i <= champion.getLevel(); i++) {
+                    printLevelUp(champion, fs, j, i);
+                }
                 // level up abilitatilor campionului
                 for (int i = 0; i < (champion.getLevel() - level); ++i) {
                     spells.get(j).get(0).levelUP();
@@ -255,6 +289,9 @@ public final class Main {
                     / Constants.FRACTION_EXP);
             if (secondChampion.getLevel() > level) {
                 secondChampion.levelUp();
+                for (int i = level + 1; i <= secondChampion.getLevel(); i++) {
+                    printLevelUp(secondChampion, fs, k, i);
+                }
                 for (int i = 0; i < (secondChampion.getLevel() - level); ++i) {
                     spells.get(k).get(0).levelUP();
                     spells.get(k).get(1).levelUP();
@@ -262,10 +299,45 @@ public final class Main {
             }
         } else if (champion.getState().equals("dead")
                 && secondChampion.getState().equals("dead")) {
+            //System.out.println("aici");
             fs.writeWord("Player " + secondChampion.getLongType() + " " + k + " was killed by "
                     + champion.getLongType() + " " + j + "\n");
             fs.writeWord("Player " + champion.getLongType() + " " + j + " was killed by "
                     + secondChampion.getLongType() + " " + k + "\n");
+            int level = champion.getLevel();
+            champion.addXp(Math.max(0, Constants.EXPERIENCE - (champion.getLevel()
+                    - secondChampion.getLevel()) * Constants.SMALL_EXPERIENCE));
+            champion.setLevel((champion.getXp() - Constants.EXPERIENCE) / Constants.FRACTION_EXP);
+           // System.out.println("primul" + champion.getXp());
+            //level up daca au xp ul necesar
+            if (champion.getLevel() > level) {
+                // level up campionului
+                champion.levelUp();
+                for (int i = level + 1; i <= champion.getLevel(); i++) {
+                    printLevelUp(champion, fs, j, i);
+                }
+                // level up abilitatilor campionului
+                for (int i = 0; i < (champion.getLevel() - level); ++i) {
+                    spells.get(j).get(0).levelUP();
+                    spells.get(j).get(1).levelUP();
+                }
+            }
+            secondChampion.addXp(Math.max(0, Constants.EXPERIENCE - (secondChampion.getLevel()
+                    - level) * Constants.SMALL_EXPERIENCE));
+            level = secondChampion.getLevel();
+            secondChampion.setLevel((secondChampion.getXp() - Constants.EXPERIENCE)
+                    / Constants.FRACTION_EXP);
+            //System.out.println("al doilea " + secondChampion.getXp());
+            if (secondChampion.getLevel() > level) {
+                secondChampion.levelUp();
+                for (int i = level + 1; i <= secondChampion.getLevel(); i++) {
+                    printLevelUp(secondChampion, fs, k, i);
+                }
+                for (int i = 0; i < (secondChampion.getLevel() - level); ++i) {
+                    spells.get(k).get(0).levelUP();
+                    spells.get(k).get(1).levelUP();
+                }
+            }
         }
     }
 
