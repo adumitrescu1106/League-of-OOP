@@ -8,12 +8,12 @@ import champions.Wizard;
 import helpers.Constants;
 
 public class GoodBoy extends Angel implements Visitor {
-    public GoodBoy(int x, int y) {
+    public GoodBoy(final int x, final int y) {
         super(x, y);
         this.setType("GoodBoy");
     }
 
-    public final void visit(Knight knight) {
+    public final void visit(final Knight knight) {
         knight.increaseAll(Constants.GOODBOY_K);
         knight.heal(Constants.GOODBOY_KNIGHT_HEAL);
         if (knight.getHp() > (Constants.KNIGHT_HP + knight.getLevel() * Constants.KNIGHT_HP_UP)) {
@@ -21,7 +21,7 @@ public class GoodBoy extends Angel implements Visitor {
         }
     }
 
-    public final void visit(Pyromancer pyromancer) {
+    public final void visit(final Pyromancer pyromancer) {
         pyromancer.increaseAll(Constants.GOODBOY_P);
         pyromancer.heal(Constants.GOODBOY_PYRO_HEAL);
         if (pyromancer.getHp() > (Constants.PYROMANCER_HP + pyromancer.getLevel()
@@ -31,7 +31,7 @@ public class GoodBoy extends Angel implements Visitor {
         }
     }
 
-    public final void visit(Rogue rogue) {
+    public final void visit(final Rogue rogue) {
         rogue.increaseAll(Constants.GOODBOY_R);
         rogue.heal(Constants.GOODBOY_ROGUE_HEAL);
         if (rogue.getHp() > (Constants.ROGUE_HP + rogue.getLevel() * Constants.ROGUE_HP_UP)) {
@@ -39,7 +39,7 @@ public class GoodBoy extends Angel implements Visitor {
         }
     }
 
-    public final void visit(Wizard wizard) {
+    public final void visit(final Wizard wizard) {
         wizard.increaseAll(Constants.GOODBOY_W);
         wizard.heal(Constants.GOODBOY_WIZARD_HEAL);
         if (wizard.getHp() > (Constants.WIZARD_HP + wizard.getLevel() * Constants.WIZARD_HP_UP)) {

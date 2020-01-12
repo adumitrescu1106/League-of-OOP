@@ -42,7 +42,7 @@ public class Pyromancer extends Champion implements Visitable {
         return longType;
     }
 
-    public final void setLongType(String longType) {
+    public final void setLongType(final String longType) {
         this.longType = longType;
     }
 
@@ -54,7 +54,7 @@ public class Pyromancer extends Champion implements Visitable {
     public final void accept(final Visitor v) {
         v.visit(this);
     }
-
+    // strategy
     public final void playStyle() {
         if (((Constants.PYROMANCER_HP + Constants.PYROMANCER_HP_UP * this.getLevel())
                 / Constants.STRATEGY_P_1) < this.getHp() && this.getHp()
@@ -62,7 +62,8 @@ public class Pyromancer extends Champion implements Visitable {
                 / Constants.STRATEGY_P_2)) {
             this.takeDmg(this.getHp() / Constants.LIFE_PYRO_AGGR);
             this.increaseAll(Constants.AGGRESSIVE_P);
-        } else if (this.getHp() < ((Constants.PYROMANCER_HP + Constants.PYROMANCER_HP_UP * this.getLevel())
+        } else if (this.getHp() < ((Constants.PYROMANCER_HP + Constants.PYROMANCER_HP_UP
+                * this.getLevel())
                 / Constants.STRATEGY_P_1)) {
             this.heal(this.getHp() / Constants.LIFE_PYRO_DEF);
             this.decreaseAll(Constants.DEFENSIVE_P);

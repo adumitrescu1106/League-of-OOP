@@ -43,15 +43,14 @@ public class Knight extends Champion implements Visitable, Strategy {
         return longType;
     }
 
-    public final void setLongType(String longType) {
+    public final void setLongType(final String longType) {
         this.longType = longType;
     }
 
     public final void accept(final Visitor v) {
         v.visit(this);
     }
-
-    @SuppressWarnings("checkstyle:WhitespaceAfter")
+    // strategy
     public final void playStyle() {
         if (((Constants.KNIGHT_HP + Constants.KNIGHT_HP_UP * this.getLevel())
                 / Constants.STRATEGY_K_1) < this.getHp() && this.getHp()

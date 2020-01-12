@@ -6,6 +6,7 @@ import abilities.*;
 import angels.*;
 import champions.*;
 import fileio.FileSystem;
+import helpers.Constants;
 
 
 public final class GameInputLoader {
@@ -89,7 +90,7 @@ public final class GameInputLoader {
                 ArrayList<Angel> newAngels = new ArrayList<>();
                 for (int j = 0; j < index; ++j) {
                     String str = fs.nextWord();
-                    String[] arrayOfString = str.split(",", 5);
+                    String[] arrayOfString = str.split(",", Constants.INPUT_HELPER);
                     String type = arrayOfString[0];
                     int x = Integer.parseInt(arrayOfString[1]);
                     int y = Integer.parseInt(arrayOfString[2]);

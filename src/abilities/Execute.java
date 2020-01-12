@@ -54,14 +54,8 @@ public class Execute extends Ability implements Visitor {
             rogue.setHp(0);
         } else if (rogue.getPosition().equals('L')) {
             rogue.takeDmg(Math.round(executeDmg * this.getRogueModifier() * Constants.KNIGHT_LAND));
-
-//            System.out.println("execute " + Math.round(executeDmg * this.getRogueModifier() * Constants.KNIGHT_LAND));
-//            System.out.println("Execute coef " + this.getRogueModifier());
         } else {
             rogue.takeDmg(Math.round(executeDmg * this.getRogueModifier()));
-
-//            System.out.println("execute " + Math.round(executeDmg * this.getRogueModifier()));
-//            System.out.println("Execute coef " + this.getRogueModifier());
         }
     }
 
@@ -70,7 +64,6 @@ public class Execute extends Ability implements Visitor {
         if (wizard.getHp() <= Math.round((Constants.WIZARD_HP
                 + wizard.getLevel() * Constants.WIZARD_HP_UP)
                 * (Constants.EXECUTE_KILL + Constants.EXECUTE_KILL_ADD * this.getLevel()))) {
- //           System.out.println("aici" + wizard.getHp());
             wizard.addDamageDeflect(Math.round(executeDmg));
             wizard.setHp(0);
         } else if (wizard.getPosition().equals('L')) {
@@ -78,12 +71,10 @@ public class Execute extends Ability implements Visitor {
                     * Constants.KNIGHT_LAND));
             //pentru deflect
             wizard.addDamageDeflect(Math.round(executeDmg * Constants.KNIGHT_LAND));
-//            System.out.println("aici" + wizard.getDamageDeflect());
         } else {
             wizard.takeDmg(Math.round(executeDmg * this.getWizardModifier()));
             //pentru deflect
             wizard.addDamageDeflect(Math.round(executeDmg));
-//            System.out.println("aici" + wizard.getDamageDeflect());
         }
     }
 

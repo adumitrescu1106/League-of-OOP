@@ -43,7 +43,7 @@ public class Rogue extends Champion implements Visitable {
         return longType;
     }
 
-    public final void setLongType(String longType) {
+    public final void setLongType(final String longType) {
         this.longType = longType;
     }
 
@@ -55,7 +55,7 @@ public class Rogue extends Champion implements Visitable {
     public final void accept(final Visitor v) {
         v.visit(this);
     }
-
+    //strategy
     public final void playStyle() {
         if (((Constants.ROGUE_HP + Constants.ROGUE_HP_UP * this.getLevel())
                 / Constants.STRATEGY_R_1) < this.getHp() && this.getHp()

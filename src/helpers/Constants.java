@@ -170,4 +170,7 @@ public class Constants {
     public static final float LEVEL_ANGEL_P = 0.2f;
     public static final float LEVEL_ANGEL_R = 0.15f;
     public static final float LEVEL_ANGEL_W = 0.25f;
+
+    // input
+    public static final int INPUT_HELPER = 5;
 }

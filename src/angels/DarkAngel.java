@@ -9,33 +9,33 @@ import helpers.Constants;
 
 
 public class DarkAngel extends Angel implements Visitor {
-    public DarkAngel(int x, int y) {
+    public DarkAngel(final int x, final int y) {
         super(x, y);
         this.setType("DarkAngel");
     }
 
-    public final void visit(Knight knight) {
+    public final void visit(final Knight knight) {
         knight.takeDmg(Constants.DARK_KNIGHT_DMG);
         if (knight.getHp() <= 0) {
             knight.setState("dead");
         }
     }
 
-    public final void visit(Pyromancer pyromancer) {
+    public final void visit(final Pyromancer pyromancer) {
         pyromancer.takeDmg(Constants.DARK_PYRO_DMG);
         if (pyromancer.getHp() <= 0) {
             pyromancer.setState("dead");
         }
     }
 
-    public final void visit(Rogue rogue) {
+    public final void visit(final Rogue rogue) {
         rogue.takeDmg(Constants.DARK_ROGUE_DMG);
         if (rogue.getHp() <= 0) {
             rogue.setState("dead");
         }
     }
 
-    public final void visit(Wizard wizard) {
+    public final void visit(final Wizard wizard) {
         wizard.takeDmg(Constants.DARK_WIZARD_DMG);
         if (wizard.getHp() <= 0) {
             wizard.setState("dead");

@@ -199,7 +199,7 @@ public class Champion implements Visitable, Strategy {
         return kFirstModifier;
     }
 
-    public final void setkFirstModifier(float kFirstModifier) {
+    public final void setkFirstModifier(final float kFirstModifier) {
         this.kFirstModifier = kFirstModifier;
     }
 
@@ -207,7 +207,7 @@ public class Champion implements Visitable, Strategy {
         return kSecondModifier;
     }
 
-    public final void setkSecondModifier(float kSecondModifier) {
+    public final void setkSecondModifier(final float kSecondModifier) {
         this.kSecondModifier = kSecondModifier;
     }
 
@@ -215,7 +215,7 @@ public class Champion implements Visitable, Strategy {
         return pFirstModifier;
     }
 
-    public final void setpFirstModifier(float pFirstModifier) {
+    public final void setpFirstModifier(final float pFirstModifier) {
         this.pFirstModifier = pFirstModifier;
     }
 
@@ -223,7 +223,7 @@ public class Champion implements Visitable, Strategy {
         return pSecondModifier;
     }
 
-    public final void setpSecondModifier(float pSecondModifier) {
+    public final void setpSecondModifier(final float pSecondModifier) {
         this.pSecondModifier = pSecondModifier;
     }
 
@@ -231,7 +231,7 @@ public class Champion implements Visitable, Strategy {
         return rFirstModifier;
     }
 
-    public final void setrFirstModifier(float rFirstModifier) {
+    public final void setrFirstModifier(final float rFirstModifier) {
         this.rFirstModifier = rFirstModifier;
     }
 
@@ -239,7 +239,7 @@ public class Champion implements Visitable, Strategy {
         return rSecondModifier;
     }
 
-    public final void setrSecondModifier(float rSecondModifier) {
+    public final void setrSecondModifier(final float rSecondModifier) {
         this.rSecondModifier = rSecondModifier;
     }
 
@@ -247,38 +247,38 @@ public class Champion implements Visitable, Strategy {
         return wFirstModifier;
     }
 
-    public final void setwFirstModifier(float wFirstModifier) {
+    public final void setwFirstModifier(final float wFirstModifier) {
         this.wFirstModifier = wFirstModifier;
     }
 
     public final float getwSecondModifier() {
         return wSecondModifier;
     }
-    public final void increaseKfirst(float increase) {
+    public final void increaseKfirst(final float increase) {
         this.setkFirstModifier(this.getkFirstModifier() + increase);
     }
-    public final void increaseKsecond(float increase) {
+    public final void increaseKsecond(final float increase) {
         this.setkSecondModifier(this.getkSecondModifier() + increase);
     }
-    public final void increaseRfirst(float increase) {
+    public final void increaseRfirst(final float increase) {
         this.setrFirstModifier(this.getrFirstModifier() + increase);
     }
-    public final void increaseRsecond(float increase) {
+    public final void increaseRsecond(final float increase) {
         this.setrSecondModifier(this.getrSecondModifier() + increase);
     }
-    public final void increasePfirst(float increase) {
+    public final void increasePfirst(final float increase) {
         this.setpFirstModifier(this.getpFirstModifier() + increase);
     }
-    public final void increasePsecond(float increase) {
+    public final void increasePsecond(final float increase) {
         this.setpSecondModifier(this.getpSecondModifier() + increase);
     }
-    public final void increaseWfirst(float increase) {
+    public final void increaseWfirst(final float increase) {
         this.setwFirstModifier(this.getwFirstModifier() + increase);
     }
-    public final void increaseWsecond(float increase) {
+    public final void increaseWsecond(final float increase) {
         this.setwSecondModifier(this.getwSecondModifier() + increase);
     }
-    public final void increaseAll(float percentage) {
+    public final void increaseAll(final float percentage) {
         this.increaseKfirst(percentage);
         this.increaseKsecond(percentage);
         this.increasePfirst(percentage);
@@ -289,7 +289,7 @@ public class Champion implements Visitable, Strategy {
         this.increaseWsecond(percentage);
     }
 
-    public final void decreaseAll(float percentage) {
+    public final void decreaseAll(final float percentage) {
         this.decreaseKfirst(percentage);
         this.decreaseKsecond(percentage);
         this.decreasePfirst(percentage);
@@ -299,32 +299,32 @@ public class Champion implements Visitable, Strategy {
         this.decreaseWfirst(percentage);
         this.decreaseWsecond(percentage);
     }
-    public final void decreaseKfirst(float decrease) {
+    public final void decreaseKfirst(final float decrease) {
         this.setkFirstModifier(this.getkFirstModifier() - decrease);
     }
-    public final void decreaseKsecond(float decrease) {
+    public final void decreaseKsecond(final float decrease) {
         this.setkSecondModifier(this.getkSecondModifier() - decrease);
     }
-    public final void decreaseRfirst(float decrease) {
+    public final void decreaseRfirst(final float decrease) {
         this.setrFirstModifier(this.getrFirstModifier() - decrease);
     }
-    public final void decreaseRsecond(float decrease) {
+    public final void decreaseRsecond(final float decrease) {
         this.setrSecondModifier(this.getrSecondModifier() - decrease);
     }
-    public final void decreasePfirst(float decrease) {
+    public final void decreasePfirst(final float decrease) {
         this.setpFirstModifier(this.getpFirstModifier() - decrease);
     }
-    public final void decreasePsecond(float decrease) {
+    public final void decreasePsecond(final float decrease) {
         this.setpSecondModifier(this.getpSecondModifier() - decrease);
     }
-    public final void decreaseWfirst(float decrease) {
+    public final void decreaseWfirst(final float decrease) {
         this.setwFirstModifier(this.getwFirstModifier() - decrease);
     }
-    public final void decreaseWsecond(float decrease) {
+    public final void decreaseWsecond(final float decrease) {
         this.setwSecondModifier(this.getwSecondModifier() - decrease);
     }
 
-    public final void setwSecondModifier(float wSecondModifier) {
+    public final void setwSecondModifier(final float wSecondModifier) {
         this.wSecondModifier = wSecondModifier;
     }
 
@@ -344,35 +344,6 @@ public class Champion implements Visitable, Strategy {
     public final void addXp(final int xpGained) {
         this.xp = this.xp + xpGained;
     }
-
-    @Override
-    public String toString() {
-        return "Champion{" +
-                "hp=" + hp +
-                ", xp=" + xp +
-                ", level=" + level +
-                ", xPosition=" + xPosition +
-                ", yPosition=" + yPosition +
-                ", paralysis=" + paralysis +
-                ", overtimeDuration=" + overtimeDuration +
-                ", overtimeType='" + overtimeType + '\'' +
-                ", overtimeDmg=" + overtimeDmg +
-                ", position=" + position +
-                ", backstabIndex=" + backstabIndex +
-                ", damageDeflect=" + damageDeflect +
-                ", state='" + state + '\'' +
-                ", fight=" + fight +
-                ", kFirstModifier=" + kFirstModifier +
-                ", kSecondModifier=" + kSecondModifier +
-                ", pFirstModifier=" + pFirstModifier +
-                ", pSecondModifier=" + pSecondModifier +
-                ", rFirstModifier=" + rFirstModifier +
-                ", rSecondModifier=" + rSecondModifier +
-                ", wFirstModifier=" + wFirstModifier +
-                ", wSecondModifier=" + wSecondModifier +
-                '}';
-    }
-
 
     @Override
     public void playStyle() {

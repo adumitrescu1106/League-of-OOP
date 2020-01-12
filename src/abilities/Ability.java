@@ -15,7 +15,7 @@ public class Ability implements Visitor {
         return knightModifier;
     }
 
-    public final void setKnightModifier(float knightModifier) {
+    public final void setKnightModifier(final float knightModifier) {
         this.knightModifier = knightModifier;
     }
 
@@ -23,7 +23,7 @@ public class Ability implements Visitor {
         return pyroModifier;
     }
 
-    public final void setPyroModifier(float pyroModifier) {
+    public final void setPyroModifier(final float pyroModifier) {
         this.pyroModifier = pyroModifier;
     }
 
@@ -31,7 +31,7 @@ public class Ability implements Visitor {
         return rogueModifier;
     }
 
-    public final void setRogueModifier(float rogueModifier) {
+    public final void setRogueModifier(final float rogueModifier) {
         this.rogueModifier = rogueModifier;
     }
 
@@ -39,7 +39,7 @@ public class Ability implements Visitor {
         return wizardModifier;
     }
 
-    public final void setWizardModifier(float wizardModifier) {
+    public final void setWizardModifier(final float wizardModifier) {
         this.wizardModifier = wizardModifier;
     }
 

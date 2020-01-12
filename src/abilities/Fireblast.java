@@ -5,7 +5,6 @@ import champions.Pyromancer;
 import champions.Rogue;
 import champions.Wizard;
 import helpers.Constants;
-import jdk.swing.interop.SwingInterOpUtils;
 
 public class Fireblast extends Ability implements Visitor {
     private int fireblastDmg;
@@ -42,14 +41,8 @@ public class Fireblast extends Ability implements Visitor {
         if (pyromancer.getPosition().equals('V')) {
             pyromancer.takeDmg(Math.round(fireblastDmg * Constants.VOLCANIC_LAND
                     * this.getPyroModifier()));
-//            System.out.println("fireblast" + Math.round(fireblastDmg * Constants.VOLCANIC_LAND
-//                    * this.getPyroModifier()));
-//            System.out.println("modifier " + this.getPyroModifier());
         } else {
             pyromancer.takeDmg(Math.round(fireblastDmg * this.getPyroModifier()));
-//            System.out.println("fireblast" + Math.round(fireblastDmg
-//                    * this.getPyroModifier()));
-//            System.out.println("modifier " + this.getPyroModifier());
         }
     }
 

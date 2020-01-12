@@ -31,7 +31,8 @@ public class GameInput {
     public GameInput(final int rounds, final ArrayList<ArrayList<Character>> arena,
                      final ArrayList<Champion> players, final int nDimension,
                      final int mDimension, final ArrayList<ArrayList<Character>> moves,
-                     final ArrayList<ArrayList<Ability>> spells, ArrayList<ArrayList<Angel>> angels) {
+                     final ArrayList<ArrayList<Ability>> spells,
+                     final ArrayList<ArrayList<Angel>> angels) {
         this.arena = arena;
         this.players = players;
         this.moves = moves;

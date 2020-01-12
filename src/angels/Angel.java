@@ -11,25 +11,25 @@ public class Angel implements Visitor {
     private int yPosition;
     private String type;
 
-    public Angel(int x, int y) {
+    public Angel(final int x, final int y) {
         this.xPosition = x;
         this.yPosition = y;
         this.type = "angel";
     }
 
-    public void visit(Knight knight) {
+    public void visit(final Knight knight) {
 
     }
 
-    public void visit(Pyromancer pyromancer) {
+    public void visit(final Pyromancer pyromancer) {
 
     }
 
-    public void visit(Rogue rogue) {
+    public void visit(final Rogue rogue) {
 
     }
 
-    public void visit(Wizard wizard) {
+    public void visit(final Wizard wizard) {
 
     }
 
@@ -37,7 +37,7 @@ public class Angel implements Visitor {
         return xPosition;
     }
 
-    public final void setxPosition(int xPosition) {
+    public final void setxPosition(final int xPosition) {
         this.xPosition = xPosition;
     }
 
@@ -45,7 +45,7 @@ public class Angel implements Visitor {
         return yPosition;
     }
 
-    public final void setyPosition(int yPosition) {
+    public final void setyPosition(final int yPosition) {
         this.yPosition = yPosition;
     }
 
@@ -53,16 +53,8 @@ public class Angel implements Visitor {
         return type;
     }
 
-    public final void setType(String type) {
+    public final void setType(final String type) {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Angel{" +
-                "xPosition=" + xPosition +
-                ", yPosition=" + yPosition +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }

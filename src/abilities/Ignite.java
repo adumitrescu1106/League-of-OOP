@@ -46,7 +46,7 @@ public class Ignite extends Ability implements Visitor {
             // se aplica damage-ul din runda in care este castat ignite-ul
             knight.takeDmg(Math.round(Math.round(igniteDmg * Constants.VOLCANIC_LAND)
                     * this.getKnightModifier()));
-            knight.setOvertimeDmg(Math.round(Math.round(igniteOvertime * Constants.VOLCANIC_LAND )
+            knight.setOvertimeDmg(Math.round(Math.round(igniteOvertime * Constants.VOLCANIC_LAND)
                     * this.getKnightModifier()));
         } else {
             knight.takeDmg(Math.round(igniteDmg * this.getKnightModifier()));
@@ -74,7 +74,8 @@ public class Ignite extends Ability implements Visitor {
         rogue.setOvertimeDuration(Constants.IGNITE_ROUNDS);
         rogue.setOvertimeDmg(Math.round(igniteOvertime * this.getRogueModifier()));
         if (rogue.getPosition().equals('V')) {
-            rogue.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND * this.getRogueModifier()));
+            rogue.takeDmg(Math.round(igniteDmg * Constants.VOLCANIC_LAND
+                    * this.getRogueModifier()));
             rogue.setOvertimeDmg(Math.round(igniteOvertime * this.getRogueModifier()
                     * Constants.VOLCANIC_LAND));
         } else {
